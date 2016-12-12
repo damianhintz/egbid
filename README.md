@@ -1,11 +1,13 @@
 egbid.ma v1.1-beta, 12 grudnia 2016
 ---
-Aktualizacja identyfikatorów OT_BUBD_A_EGiB
+Synchronizacja id budynku w pliku dgn z bazą danych mdb w tabeli OT_BUBD_A_EGiB
 
 # Nowe funkcje:
 
-* Aktualizacja identyfikatorów w tabeli OT_BUBD_A_EGiB
-* Wyszukiwanie tekstów poza budynkiem
+* Synchronizacja pełna
+* Synchronizacja przyrostowa
+* Tylko budynki, gdzie x_zrodloDanychG = 'EGiB'
+* Wyszukiwanie tekstów/id poza budynkiem
 
 # Użycie:
 
