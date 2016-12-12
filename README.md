@@ -1,48 +1,52 @@
-egbid.ma v1.0.0.21, 23 wrzeœnia 2015
---
-Aktualizacja identyfikatorów OT_BUBD_A_EGiB
+egbid.ma v1.1-beta, 12 grudnia 2016
+---
+Aktualizacja identyfikatorÃ³w OT_BUBD_A_EGiB
 
 # Nowe funkcje:
 
-* Aktualizacja identyfikatorów w tabeli OT_BUBD_A_EGiB
-* Wyszukiwanie tekstów poza budynkiem
+* Aktualizacja identyfikatorÃ³w w tabeli OT_BUBD_A_EGiB
+* Wyszukiwanie tekstÃ³w poza budynkiem
 
-# U¿ycie:
+# UÅ¼ycie:
 
-1. Pod³¹czenie zbioru tekstów reprezentuj¹cych identyfikatory budynków.
-2. Wybranie ogrodzenia, aby okreœliæ zakres aktualizacji. Wszystkie teksty 
-   z pliku referencyjnego znajduj¹ce siê wewn¹trz budynku traktowane s¹ jako 
-   jego identyfikatory. Punkt zaczepienia tekstu powinien znajdowaæ siê w œrodku budynku.
+1. PodÅ‚Ä…czenie zbioru tekstÃ³w reprezentujÄ…cych identyfikatory budynkÃ³w.
+2. Wybranie ogrodzenia, aby okreÅ›liÄ‡ zakres aktualizacji. Wszystkie teksty 
+   z pliku referencyjnego znajdujÄ…ce siÄ™ wewnÄ…trz budynku traktowane sÄ… jako 
+   jego identyfikatory. Punkt zaczepienia tekstu powinien znajdowaÄ‡ siÄ™ w Å›rodku budynku.
 3. Uruchomienie polecenia "Aktualizacja OT_BUBD_A_EGiB".
 
-   Aktualizacja tabeli identyfikatorów budynków OT_BUBD_A_EGiB.
-   Pod uwagê brane s¹ tylko budynki dla których atrybut x_zrodloDanychG = 'EGiB'.
+   Aktualizacja tabeli identyfikatorÃ³w budynkÃ³w OT_BUBD_A_EGiB.
+   Pod uwagÄ™ brane sÄ… tylko budynki dla ktÃ³rych atrybut x_zrodloDanychG = 'EGiB'.
 
-   UWAGA: w przypadku pe³nej aktualizacji ca³a zawartoœæ tabeli OT_BUBD_A_EGiB jest przedtem usuwana.
+   UWAGA: w przypadku peÅ‚nej aktualizacji caÅ‚a zawartoÅ›Ä‡ tabeli OT_BUBD_A_EGiB jest przedtem usuwana.
 
 # Polecenia:
 
-a) Aktualizacja OT_BUBD_A_EGiB (przyrostowa, pe³na)
+a) Aktualizacja OT_BUBD_A_EGiB (przyrostowa, peÅ‚na)
  - przyrostowa
-   * zachowuje identyfikatory budynków, stare wpisy w tabeli OT_BUBD_A_EGiB pozostaj¹ nienaruszone
-   * do tabeli identyfikatorów dopisywane s¹ tylko identyfikatory, które istniej¹ w pliku referencyjnym
-     ale nie zosta³y jeszcze dodane do tabeli
- - pe³na
+   * zachowuje identyfikatory budynkÃ³w, stare wpisy w tabeli OT_BUBD_A_EGiB pozostajÄ… nienaruszone
+   * do tabeli identyfikatorÃ³w dopisywane sÄ… tylko identyfikatory, ktÃ³re istniejÄ… w pliku referencyjnym
+     ale nie zostaÅ‚y jeszcze dodane do tabeli
+ - peÅ‚na
    * usuwa stare identyfikatory (oczyszczanie tabeli OT_BUBD_A_EGiB) i tworzy nowe wpisy na podstawie
-     danych zawartych w pliku g³ównym oraz referencyjnym
+     danych zawartych w pliku gÅ‚Ã³wnym oraz referencyjnym
 
-b) Wyszukiwanie tekstów poza budynkiem
- - znalezienie tekstów dla których prawdopodobnie punkt zaczepienia tekstu jest nieprawid³owy
+b) Wyszukiwanie tekstÃ³w poza budynkiem
+ - znalezienie tekstÃ³w dla ktÃ³rych prawdopodobnie punkt zaczepienia tekstu jest nieprawidÅ‚owy
 
 # Historia
 
 Do zrobienia
 
-* [ ] podrêcznik u¿ytkownika
+* [ ] podrÄ™cznik uÅ¼ytkownika
+
+2016-12-12 v1.1-beta
+
+* aktualizacja: dostosowanie do nowego schematu bazy danych (poz = 1, EGiB -> EGiB_lokalnyId)
 
 2015-09-23 v1.0.0.21
 
-* poprawka: nowy format powi¹zania danych u¿ytkownika
+* poprawka: nowy format powiÄ…zania danych uÅ¼ytkownika
 
 2013-04-16 v0.0.1.17
 

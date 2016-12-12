@@ -12,9 +12,15 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>budynek-id.mc</itemPath>
-      <itemPath>main.c</itemPath>
+      <itemPath>README.md</itemPath>
+      <itemPath>app-ver.h</itemPath>
+      <itemPath>budynekId.h</itemPath>
+      <itemPath>budynekId.mc</itemPath>
+      <itemPath>main.h</itemPath>
       <itemPath>main.mc</itemPath>
+      <itemPath>ui-dlg.h</itemPath>
+      <itemPath>ui-dlg.mc</itemPath>
+      <itemPath>ui-txt.h</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -25,7 +31,10 @@
                    displayName="Important Files"
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Make_v7.cmd</itemPath>
+      <itemPath>Make_v8.cmd</itemPath>
       <itemPath>Makefile</itemPath>
+      <itemPath>_make_v8.cmd</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
@@ -38,11 +47,23 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="budynek-id.mc" ex="false" tool="0" flavor2="0">
+      <item path="README.md" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="main.c" ex="false" tool="0" flavor2="0">
+      <item path="app-ver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="budynekId.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="budynekId.mc" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="main.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.mc" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ui-dlg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ui-dlg.mc" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ui-txt.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -65,11 +86,23 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="budynek-id.mc" ex="false" tool="0" flavor2="0">
+      <item path="README.md" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="main.c" ex="false" tool="0" flavor2="0">
+      <item path="app-ver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="budynekId.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="budynekId.mc" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="main.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.mc" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ui-dlg.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ui-dlg.mc" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ui-txt.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

@@ -1,13 +1,11 @@
 #include "ui-dlg.h"
 #include "main.h"
-#include "budynek-id.h"
+#include "budynekId.h"
 
-/* uiDlg_getMainDialog */
 DialogBox* uiDlg_getMainDialog() {
     return mdlDialog_find(C_ID_DLG_Main, NULL);
 }
 
-/* main dialog hook */
 void dialog_mainHook(DialogMessage *dmP) {
     /* ignore any messages being sent to modal dialog hook */
     if (dmP->dialogId != C_ID_DLG_Main)
@@ -50,16 +48,15 @@ void dialog_aktualizacjaPrzyrHook(DialogItemMessage *dimP) {
         {
             if (dimP->u.button.buttonTrans != BUTTONTRANS_UP)
                 break;
-            
+
             if (ACTIONBUTTON_OK != mdlDialog_openAlert(
-                "Masz zamiar wykonaæ przyrostow¹ aktualizacjê tabeli identyfikatorów budynków OT_BUBD_A_EGiB. "
-                "Teksty identyfikatorów z ewidencji pod³¹cz referencyjnie i wybierz ogrodzenie. "
-                "Kontynuowaæ ?"
-                ))
-            {
+                    "Masz zamiar wykonac przyrostowa aktualizacje tabeli identyfikatorow budynkow OT_BUBD_A_EGiB. "
+                    "Teksty identyfikatorow z ewidencji podlacz referencyjnie i wybierz ogrodzenie. "
+                    "Kontynuowac ?"
+                    )) {
                 break;
             }
-            
+
             mdlFile_appendLine("-TBDUTIL_EGBID_START-");
             budynek_aktualizujId("OT_BUBD_A", FALSE);
             mdlFile_appendLine("-TBDUTIL_EGBID_KONIEC-");
@@ -79,14 +76,13 @@ void dialog_aktualizacjaPelnaHook(DialogItemMessage *dimP) {
         {
             if (dimP->u.button.buttonTrans != BUTTONTRANS_UP)
                 break;
-            
+
             if (ACTIONBUTTON_OK != mdlDialog_openAlert(
-                "Masz zamiar wykonaæ pe³n¹ aktualizacjê tabeli identyfikatorów budynków OT_BUBD_A_EGiB. "
-                "Teksty identyfikatorów z ewidencji pod³¹cz referencyjnie i wybierz ogrodzenie. "
-                "Uwaga! Zawartoœæ tabeli identyfikatorów zostanie podczas tego procesu wyczyszczona i zaktualizowana. "
-                "Kontynuowaæ ?"
-                ))
-            {
+                    "Masz zamiar wykonac pelna aktualizacje tabeli identyfikatorow budynkow OT_BUBD_A_EGiB. "
+                    "Teksty identyfikatorow z ewidencji podlacz referencyjnie i wybierz ogrodzenie. "
+                    "Uwaga! Zawartosc tabeli identyfikatorow zostanie podczas tego procesu wyczyszczona i zaktualizowana. "
+                    "Kontynuowac ?"
+                    )) {
                 break;
             }
 
@@ -109,7 +105,6 @@ DialogHookInfo uHooks[] = {
     {C_HK_PDM_ADR_Pelna, dialog_aktualizacjaPelnaHook},
 };
 
-/* dialog_open - poka¿ g³ówne okno */
 int uiDlg_appLoad(int argc, char* argv[]) {
     char *setP;
     RscFileHandle rscFileH;

@@ -1,5 +1,7 @@
-#include "budynek-id.h"
+#include "budynekId.h"
 #include "main.h"
+
+const char* _egib = "EGiB_lokalnyId";
 
 int budynek_dodajId(ULong id, ULong mslink, char* wartosc, int pelna) {
     char msg[256];
@@ -31,7 +33,8 @@ int budynek_dodajId(ULong id, ULong mslink, char* wartosc, int pelna) {
     }
 
     //sprawdzenie czy dane id i wartosc juz istnieje
-    sprintf(query, "SELECT id, EGiB FROM OT_BUBD_A_EGiB WHERE id=%d AND EGiB='%s'", id, wartosc);
+    sprintf(query, "SELECT id, %s FROM OT_BUBD_A_EGiB WHERE id=%d AND EGiB='%s'",
+            _egib, id, wartosc);
 
     if (SUCCESS == mdlDB_sqlQuery(value, query)) {
         if (pelna) {
@@ -46,7 +49,8 @@ int budynek_dodajId(ULong id, ULong mslink, char* wartosc, int pelna) {
     }
 
     //aktualizacja tabeli, dodanie id budynku
-    sprintf(query, "INSERT INTO OT_BUBD_A_EGiB (id, EGiB) VALUES (%ld, '%s')", id, wartosc);
+    sprintf(query, "INSERT INTO OT_BUBD_A_EGiB (id, poz, %s) VALUES (%ld, 1, '%s')",
+            _egib, id, wartosc);
 
     if (SUCCESS != mdlDB_processSQL(query)) {
         sprintf(msg, "uwaga: nie dodano id budynku %d", id);
@@ -149,7 +153,7 @@ int budynek_aktualizujDefinicje(LpTopoLayers defsP, int pelna) {
     n0 = n1 = n2 = n3 = nT = 0;
 
     for (i = 0; i < idElemsP->nElems; i++) {
-        
+
         TopoElem* idElemP = &idElemsP->aElems[i];
         //budynki powiazane z identyfikatorem
         TopoLpElems* budynkiElemsP = &idElemP->nadElems;

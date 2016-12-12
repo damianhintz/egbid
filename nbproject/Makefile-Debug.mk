@@ -35,9 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/budynek-id.o \
+	${OBJECTDIR}/budynekId.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/ui-dlg.o
 
 
 # C Compiler Flags
@@ -64,20 +64,20 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/egbid.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/egbid ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/budynek-id.o: budynek-id.mc
+${OBJECTDIR}/budynekId.o: budynekId.mc
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/budynek-id.o budynek-id.mc
-
-${OBJECTDIR}/main.o: main.c
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/budynekId.o budynekId.mc
 
 ${OBJECTDIR}/main.o: main.mc
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.mc
+
+${OBJECTDIR}/ui-dlg.o: ui-dlg.mc
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ui-dlg.o ui-dlg.mc
 
 # Subprojects
 .build-subprojects:
