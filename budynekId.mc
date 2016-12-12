@@ -33,15 +33,15 @@ int budynek_dodajId(ULong id, ULong mslink, char* wartosc, int pelna) {
     }
 
     //sprawdzenie czy dane id i wartosc juz istnieje
-    sprintf(query, "SELECT id, %s FROM OT_BUBD_A_EGiB WHERE id=%d AND EGiB='%s'",
-            _egib, id, wartosc);
+    sprintf(query, "SELECT id, %s FROM OT_BUBD_A_EGiB WHERE id=%d AND %s='%s'",
+            _egib, id, _egib, wartosc);
 
     if (SUCCESS == mdlDB_sqlQuery(value, query)) {
         if (pelna) {
-            sprintf(msg, "uwaga: pominieto powtorzony wpis (%d, %s)", id, wartosc);
+            sprintf(msg, "uwaga: pominieto powtorzony rekord (%d, %s)", id, wartosc);
             mdlUtil_wypiszInfo(msg);
         } else {
-            sprintf(msg, "info: pominieto juz istniejacy wpis (%d, %s)", id, wartosc);
+            sprintf(msg, "info: pominieto istniejacy rekord (%d, %s)", id, wartosc);
         }
         mdlFile_appendLine(msg);
 

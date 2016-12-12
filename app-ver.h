@@ -5,5 +5,5 @@
 #define C_ID_MAJOR 1
 #define C_ID_MINOR 0 
 #define C_ID_SUBMINOR 0
-#define C_ID_APPTITLE "egbid v1.1-beta"
+#define C_ID_APPTITLE "egbid v1.1.1-beta"
 #endif

@@ -1,4 +1,4 @@
-egbid.ma v1.1-beta, 12 grudnia 2016
+egbid.ma v1.1.1-beta, 12 grudnia 2016
 ---
 Synchronizacja id budynku w pliku dgn z bazą danych mdb w tabeli OT_BUBD_A_EGiB
 
@@ -41,6 +41,11 @@ b) Wyszukiwanie tekstów poza budynkiem
 Do zrobienia
 
 * [ ] podręcznik użytkownika
+* [ ] poprawić synchronizację dla typu ogordzenia przecinanie
+
+2016-12-12 v1.1.1-beta
+
+* poprawione: dodawanie tego samego rekordu
 
 2016-12-12 v1.1-beta
 
