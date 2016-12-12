@@ -1,0 +1,80 @@
+/* container.h */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <msmisc.fdf>
+
+#if !defined (H_CONTAINER)
+#define H_CONTAINER
+
+typedef char* ContainerItem;
+typedef char** ContainerItemP;
+typedef int (*ContainerItemCompareP) (ContainerItemP item1, ContainerItemP item2);
+typedef void (*ContainerItemDestroyP) (ContainerItemP itemP);
+typedef void (*ContainerItemVisitorP) (ContainerItemP itemP);
+
+#define CONTAINER_SIZE 512
+
+typedef struct _container
+{
+	ContainerItemP _items;
+	int _size;
+	int _capacity;
+	int _sorted;
+	
+	ContainerItemCompareP _compare;
+	ContainerItemDestroyP _destroy;
+	ContainerItemVisitorP _visitor;
+	
+} Container; //Container/kontener
+
+//managing container
+int container_init (Container* c);
+int container_resize (Container* c, int new_size);
+int container_compact (Container* c);
+int container_clear (Container* c);
+void container_destroy (Container* c);
+
+int container_compareCallback (Container* c, ContainerItemCompareP compare);
+int container_destroyCallback (Container* c, ContainerItemDestroyP destroy);
+
+//container_properties
+int container_size (Container* c);
+int container_capacity (Container* c);
+int container_empty (Container* c);
+int container_ordered (Container* c);
+
+//inserting/deleting items
+int container_push (Container* c, ContainerItem item); //insert
+int container_insert (Container* c, int itemIndex, ContainerItem item);
+int container_pop (Container* c);
+int container_peek (Container* c, ContainerItemP itemP);
+int container_item (Container* c, int itemIndex, ContainerItemP itemP);
+//void container_deleteAt (Container* c, int itemIndex); //container_remove
+void container_min (); //if sorted head, if not search
+void container_max (); //if sorted tail, if not search
+void container_first (); //head
+void container_last (); //tail
+
+//searching items
+int container_sort (Container* c);
+int container_search (Container* c, ContainerItem item); //if sorted uses binary search if not linear search
+int container_linear_search (Container* c, ContainerItem item);
+int container_binary_search (Container* c, ContainerItem item); //container must be sorted
+
+void container_header (Container* c);
+void container_traverse (Container* c);
+
+typedef struct _containerIterator
+{
+	Container* _container;
+	int _index;
+	
+} ContainerIterator;
+
+int iterator_init (ContainerIterator* i, Container c);
+ContainerItemP iterator_next (ContainerIterator* i); //null if end
+void iterator_kill (ContainerIterator* i);
+
+#endif

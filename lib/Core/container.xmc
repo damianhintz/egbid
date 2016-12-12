@@ -1,0 +1,262 @@
+#include "container.h"
+
+int container_init (Container* c)
+{
+	if (c == NULL) return FALSE;
+	
+	c->_items = NULL;
+	c->_size = 0;
+	
+	c->_sorted = FALSE;
+	c->_compare = NULL;
+	c->_destroy = NULL;
+	c->_visitor = NULL;
+	
+	if (!container_resize (c, CONTAINER_SIZE)) return FALSE;
+	
+	return TRUE;
+}
+
+int container_resize (Container* c, int new_size)
+{
+	ContainerItemP items = NULL;
+	
+	if (c == NULL) return FALSE;
+	
+	if (new_size < c->_size) return FALSE;
+	
+	if (new_size == c->_capacity) return TRUE;
+	
+	items = (ContainerItemP) realloc (c->_items, new_size * sizeof (ContainerItem));
+	
+	if (items == NULL) return FALSE;
+	
+	c->_items = items;
+	c->_capacity = new_size;
+	
+	return TRUE;
+}
+
+int container_compact (Container* c)
+{
+	if (c == NULL) return FALSE;
+	
+	return container_resize (c, c->_size);
+}
+
+int container_clear (Container* c)
+{
+	if (c == NULL) return FALSE;
+	
+	if (c->_destroy != NULL)
+	{
+		int i = 0;
+		
+		for (i = 0; i < c->_size; i++)
+			c->_destroy (&c->_items[i]);
+	}
+	
+	c->_size = 0;
+	
+	return TRUE;
+}
+
+void container_destroy (Container* c)
+{
+	if (c->_destroy != NULL)
+	{
+		int i = 0;
+		for (i = 0; i < c->_size; i++)
+			c->_destroy (&c->_items[i]);
+	}
+	
+	free (c->_items);
+	
+	c->_items = NULL;
+	c->_size = 0;
+}
+
+int container_compareCallback (Container* c, ContainerItemCompareP compare)
+{
+	c->_compare = compare;
+	
+	return TRUE;
+}
+
+int container_destroyCallback (Container* c, ContainerItemDestroyP destroy)
+{
+	c->_destroy = destroy;
+	return TRUE;
+}
+
+int container_size (Container* c) { return c->_size; }
+int container_capacity (Container* c) { return c->_capacity; }
+int container_empty (Container* c) { return c->_size == 0; }
+int container_ordered (Container* c) { return c->_sorted; }
+
+int container_push (Container* c, ContainerItem item)
+{
+	if (c->_size == c->_capacity)
+	{
+		if (!container_resize (c, c->_capacity * 2)) return FALSE;
+	}
+	
+	c->_items[c->_size] = item;
+	c->_size++;
+	c->_sorted = FALSE;
+	
+	return TRUE;
+}
+
+int container_insert (Container* c, int itemIndex, ContainerItem item)
+{
+	if (c == NULL) return FALSE;
+	
+	if (itemIndex < 0 || itemIndex >= c->_size) return FALSE;
+	
+	if (c->_destroy != NULL)
+	{
+		c->_destroy (&c->_items[itemIndex]);
+	}
+	
+	c->_items[itemIndex] = item;
+	c->_sorted = FALSE;
+	
+	return TRUE;
+}
+
+int container_pop (Container* c)
+{
+	if (c == NULL) return FALSE;
+	
+	if (c->_size <= 0) return FALSE;
+	
+	c->_size--;
+	
+	if (c->_destroy != NULL)
+	{
+		c->_destroy (&c->_items[c->_size]);
+	}
+	
+	return TRUE;
+}
+
+int container_peek (Container* c, ContainerItemP itemP)
+{
+	if (c == NULL) return FALSE;
+	
+	if (c->_size <= 0) return FALSE;
+	
+	*itemP = c->_items[c->_size - 1];
+	
+	return TRUE;
+}
+
+int container_item (Container* c, int itemIndex, ContainerItemP itemP)
+{
+	if (c == NULL) return FALSE;
+	
+	if (itemIndex < 0 || itemIndex >= c->_size) return FALSE;
+	
+	*itemP = c->_items[itemIndex];
+	
+	return TRUE;
+}
+
+int container_sort (Container* c)
+{
+	if (c == NULL) return FALSE;
+	
+	if (c->_compare == NULL) return FALSE;
+	
+	mdlUtil_quickSort (c->_items, c->_size, sizeof (ContainerItem), c->_compare);
+	
+	c->_sorted = TRUE;
+	
+	return TRUE;
+}
+
+int container_search (Container* c, ContainerItem item)
+{
+	if (c == NULL) return FALSE;
+	
+	if (c->_sorted)
+		return container_binary_search (c, item);
+	else
+		return container_linear_search (c, item);
+}
+
+int container_linear_search (Container* c, ContainerItem item)
+{
+	int i = 0;
+	
+	if (c == NULL) return FALSE;
+	
+	if (c->_compare == NULL) return FALSE;
+	
+	for (i = 0; i < c->_size; i++)
+	{
+		if (c->_compare (&c->_items[i], &item) == 0)
+			return TRUE;
+	}
+	
+	return FALSE;
+}
+
+int container_binary_search (Container* c, ContainerItem item)
+{
+	if (c == NULL) return FALSE;
+	
+	if (c->_compare == NULL) return FALSE;
+	
+	return NULL != bsearch (&item, c->_items, c->_size, sizeof (ContainerItem), c->_compare);
+}
+
+void container_header (Container* c)
+{
+	char msg[256];
+	int i = 0;
+	
+	if (c == NULL) return;
+	
+	sprintf (msg, "size/capacity: %d/%d", c->_size, c->_capacity);
+	mdlUtil_wypiszInfo (msg);
+}
+
+void container_traverse (Container* c)
+{
+	int i = 0;
+	
+	if (c == NULL) return;
+	
+	sprintf (msg, "size/capacity: %d/%d", c->_size, c->_capacity);
+	mdlUtil_wypiszInfo (msg);
+	
+	if (c->_visitor == NULL) return;
+	
+	for (i = 0; i < c->_size; i++)
+	{
+		c->_visitor (&c->_items[i]);
+	}
+}
+
+int iterator_init (ContainerIterator* i, Container* c)
+{
+	if (i == NULL) return FALSE;
+	
+	i->_index = -1;
+	i->_container = c;
+	
+	return TRUE;
+}
+
+ContainerItemP iterator_next (ContainerIterator* i)
+{
+	ContainerItemP itemP = NULL;
+	
+	if (container_item (i->_container, ++i->_index, itemP)) return itemP;
+	else return NULL;
+	
+	//if (i->_index < i->_container->_size) itemP = i->_container[
+	//i->_index++;
+}

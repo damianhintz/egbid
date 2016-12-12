@@ -1,0 +1,6 @@
+#include "lib\Core\obiektDgn.h"
+#include "lib\Core\eMapa.h"
+#include "lib\Core\mdlGeom.h"
+#include "lib\Core\mdlFence.h"
+#include "lib\Core\skanowanieDgn.h"
+#include "lib\Core\selekcjonowanie.h"

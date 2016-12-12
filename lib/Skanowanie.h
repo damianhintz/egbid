@@ -1,0 +1,1 @@
+#include "lib\Skanowanie\skanowanieDgn.h"

@@ -1,0 +1,7 @@
+#include "lib\TBD\tbdQuery.h"
+#include "lib\TBD\tbdObiekt.h"
+#include "lib\TBD\tbdKlasa.h"
+#include "lib\TBD\tbdDgn.h"
+#include "lib\TBD\tbdMdb.h"
+#include "lib\TBD\tbdOdbc.h"
+#include "lib\TBD\tbdSBM.h"
